@@ -286,9 +286,19 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task15_LecturersAndCourseCounts()
     {
-        throw NotImplemented(nameof(Task15_LecturersAndCourseCounts));
+        return UniversityData.Lecturers
+            .GroupJoin(
+                UniversityData.Courses,
+                l => l.Id,
+                c => c.LecturerId,
+                (l, courses) => new
+                {
+                    Lecturer = l,
+                    Count = courses.Count()
+                }
+            )
+            .Select(x => $"{x.Lecturer.FirstName} {x.Lecturer.LastName} | courses: {x.Count}");
     }
-
     /// <summary>
     /// Task:
     /// For each student, find the highest final grade.
