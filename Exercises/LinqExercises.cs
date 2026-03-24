@@ -393,9 +393,27 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge03_LecturersAndAverageGradeAcrossTheirCourses()
     {
-        throw NotImplemented(nameof(Challenge03_LecturersAndAverageGradeAcrossTheirCourses));
+        return UniversityData.Lecturers
+            .GroupJoin(
+                UniversityData.Courses,
+                l => l.Id,
+                c => c.LecturerId,
+                (l, courses) => new { l, courses }
+            )
+            .Select(x => new
+            {
+                x.l,
+                Grades = x.courses
+                    .Join(
+                        UniversityData.Enrollments.Where(e => e.FinalGrade != null),
+                        c => c.Id,
+                        e => e.CourseId,
+                        (c, e) => e.FinalGrade.Value
+                    )
+            })
+            .Where(x => x.Grades.Any())
+            .Select(x => $"{x.l.FirstName} {x.l.LastName} | avg grade: {x.Grades.Average():F2}");
     }
-
     /// <summary>
     /// Challenge:
     /// Show student cities and the number of active enrollments created by students from each city.
