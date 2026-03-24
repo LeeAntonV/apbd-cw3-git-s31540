@@ -66,9 +66,15 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task04_FirstAnalyticsCourse()
     {
-        throw NotImplemented(nameof(Task04_FirstAnalyticsCourse));
-    }
+        var course = UniversityData.Courses
+            .FirstOrDefault(c => c.Category == "Analytics");
 
+        if (course == null)
+            return ["No Analytics course found."];
+
+        return [$"{course.Title} | start: {course.StartDate:yyyy-MM-dd}"];
+    }
+    
     /// <summary>
     /// Task:
     /// Check whether there is at least one inactive enrollment in the data set.
