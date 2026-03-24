@@ -89,11 +89,9 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task05_IsThereAnyInactiveEnrollment()
     {
-        var exists = UniversityData.Enrollments
-            .Any(e => !e.IsActive);
-
-        return [$"Inactive enrollment exists: {exists}"];
+        throw NotImplemented(nameof(Task05_IsThereAnyInactiveEnrollment));
     }
+
     /// <summary>
     /// Task:
     /// Check whether every lecturer has a department assigned.
