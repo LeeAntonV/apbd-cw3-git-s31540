@@ -338,9 +338,17 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge01_StudentsWithMoreThanOneActiveCourse()
     {
-        throw NotImplemented(nameof(Challenge01_StudentsWithMoreThanOneActiveCourse));
+        return UniversityData.Enrollments
+            .Where(e => e.IsActive)
+            .GroupBy(e => e.StudentId)
+            .Where(g => g.Count() > 1)
+            .Join(
+                UniversityData.Students,
+                g => g.Key,
+                s => s.Id,
+                (g, s) => $"{s.FirstName} {s.LastName} | active courses: {g.Count()}"
+            );
     }
-
     /// <summary>
     /// Challenge:
     /// List the courses that start in April 2026 and do not have any final grades assigned yet.
