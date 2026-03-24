@@ -106,9 +106,11 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task06_DoAllLecturersHaveDepartment()
     {
-        throw NotImplemented(nameof(Task06_DoAllLecturersHaveDepartment));
-    }
+        var allHaveDept = UniversityData.Lecturers
+            .All(l => !string.IsNullOrWhiteSpace(l.Department));
 
+        return [$"All lecturers have department: {allHaveDept}"];
+    }
     /// <summary>
     /// Task:
     /// Count how many active enrollments exist in the system.
