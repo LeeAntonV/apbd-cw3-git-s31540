@@ -89,9 +89,11 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task05_IsThereAnyInactiveEnrollment()
     {
-        throw NotImplemented(nameof(Task05_IsThereAnyInactiveEnrollment));
-    }
+        var exists = UniversityData.Enrollments
+            .Any(e => !e.IsActive);
 
+        return [$"Inactive enrollment exists: {exists}"];
+    }
     /// <summary>
     /// Task:
     /// Check whether every lecturer has a department assigned.
@@ -120,9 +122,11 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task07_CountActiveEnrollments()
     {
-        throw NotImplemented(nameof(Task07_CountActiveEnrollments));
-    }
+        var count = UniversityData.Enrollments
+            .Count(e => e.IsActive);
 
+        return [$"Active enrollments: {count}"];
+    }
     /// <summary>
     /// Task:
     /// Return a sorted list of distinct student cities.
