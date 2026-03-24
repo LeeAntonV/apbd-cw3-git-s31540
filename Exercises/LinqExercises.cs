@@ -30,11 +30,13 @@ public sealed class LinqExercises
     /// SELECT Email
     /// FROM Students;
     /// </summary>
+
     public IEnumerable<string> Task02_StudentEmailAddresses()
     {
-        throw NotImplemented(nameof(Task02_StudentEmailAddresses));
+        return UniversityData.Students
+            .Select(s => s.Email);
     }
-
+    
     /// <summary>
     /// Task:
     /// Sort students alphabetically by last name and then by first name.
