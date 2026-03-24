@@ -238,9 +238,16 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task13_GroupEnrollmentsByCourse()
     {
-        throw NotImplemented(nameof(Task13_GroupEnrollmentsByCourse));
+        return UniversityData.Enrollments
+            .Join(
+                UniversityData.Courses,
+                e => e.CourseId,
+                c => c.Id,
+                (e, c) => c.Title
+            )
+            .GroupBy(title => title)
+            .Select(g => $"{g.Key} | enrollments: {g.Count()}");
     }
-
     /// <summary>
     /// Task:
     /// Calculate the average final grade for each course.
